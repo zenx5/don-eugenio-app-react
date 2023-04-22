@@ -1,5 +1,7 @@
-import ListPage from './clients/List'
+import ListClientPage from './clients/List'
+import ViewClientPage from './clients/View'
 
 export {
-    ListPage
+    ListClientPage,
+    ViewClientPage
 }
