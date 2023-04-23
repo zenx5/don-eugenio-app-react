@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
-import { Box, List, ListItem, ListItemText, ListItemButton, Typography, CircularProgress, Card, CardContent, CardHeader } from '@mui/material'
+import { Box, Typography, Card, CardContent, CardHeader, Stack, Divider, CardActions, Button, CardActionArea } from '@mui/material'
 import { useDispatch, useSelector } from '../../redux/store';
 import { getClient } from '../../redux/slices/client';
 import { useParams } from 'react-router-dom';
-import Loader from '../../components/Loader';
+import { InputView, Loader } from '../../components';
 
 export default function ViewClientPage () {
     const { id } = useParams()
@@ -18,12 +18,19 @@ export default function ViewClientPage () {
 
 
     return isLoading ? <Loader /> :<Box sx={styles.container}>
-        <Card>
-            <CardHeader title={client?.display_name} />
+        <Card sx={styles.card}>
+            <CardHeader sx={styles.header} title={<Typography variant='h5'>{client?.display_name}</Typography>} />
             <CardContent sx={styles.content}>
-                <Typography><b>Email:</b> {client?.user_email}</Typography>
-                <Typography><b>Fecha de Registro:</b> {client?.user_registered}</Typography>
+                <Stack spacing={2}>
+                    <InputView label='Email:' value={client?.user_email} />
+                    <InputView label='Fecha de Registro:' value={client?.user_registered} />
+                </Stack>
+                <Divider />
+                <Typography variant='h6'>Servicios</Typography>
             </CardContent>
+            <CardActions sx={styles.actions}>
+                <Button variant='contained'>Volver</Button>
+            </CardActions>
         </Card>
     </Box>
 }
@@ -35,11 +42,29 @@ const styles = {
         justifyContent:'center',
         alignItems:'center',
         height:'-webkit-fill-available',
-        gap:'20px'
+        gap:'20px',
+        backgroundColor:'#00f3'
+    },
+    card:{
+        width:'80%',
+        height:'80%',
+        boxShadow:'0 0 10px #00f',
+        borderRadius:'20px'
+    },
+    header:{
+        pl:5,
+        pt:5,
+        '& .MuiTypography-root':{
+            fontWeight:'bold'
+        }
     },
     content:{
         display:'flex',
         flexDirection:'column',
+        p:5,
         gap:2
+    },
+    actions: {
+        pl:5
     }
 }

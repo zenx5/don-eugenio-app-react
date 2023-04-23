@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Box, List, ListItem, ListItemText, ListItemButton, Typography, ListItemIcon, Button } from '@mui/material'
 import { ArrowRight } from '@mui/icons-material'
 import { useDispatch, useSelector } from '../../redux/store';
 import { getClients } from '../../redux/slices/client';
 import { useNavigate } from 'react-router-dom';
-import Loader from '../../components/Loader';
+import { Loader } from '../../components';
 
 export default function ListClientPage () {
     const { clients, isLoading } = useSelector( state => state.client )
